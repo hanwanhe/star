@@ -9,7 +9,7 @@ local Response = require('star.lib.response')
 local Router = require('star.lib.router')
 local Dispatcher = require('star.lib.dispatcher')
 local dbClasses = {
-    redis = require 'star.db.redis'
+    redis = require('star.db.redis')
 }
 
 
