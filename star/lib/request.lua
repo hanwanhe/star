@@ -1,7 +1,9 @@
--- request.lua
--- @modify 2017-07-14 00:10
--- @author hanwanhe <hanwanhe@qq.com>
--- @desc request instance
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 00:22:10
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:54:08
+-- @desc: request instance
+
 
 local setmetatable = setmetatable
 

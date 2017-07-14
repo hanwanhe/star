@@ -1,8 +1,9 @@
--- index.lua
--- @modify 2017-07-13 24:00
--- @author hanwanhe <hanwanhe@qq.com>
--- @desc application entrance file
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 23:21:34
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:28:44
+-- @desc: application entrance  file
 
-local app = require('star.app')
+local App = require('star.app')
 local appName = 'app'
-app:new(appName):run()
+App:new(appName):run()

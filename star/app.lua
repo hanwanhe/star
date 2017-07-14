@@ -1,14 +1,16 @@
--- app.lua
--- @modify 2017-07-13 23:00
--- @author hanwanhe <hanwanhe@qq.com>
--- @desc per request create one app instance
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 22:47:44
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:55:32
+-- @desc: every request will create one app instance
+
 
 local setmetatable = setmetatable
 local Request = require('star.lib.request')
 local Response = require('star.lib.response')
 local Router = require('star.lib.router')
 local Dispatcher = require('star.lib.dispatcher')
-local dbClasses = {
+local allDbModules = {
     redis = require('star.db.redis')
 }
 
@@ -30,16 +32,16 @@ function App:run()
   Dispatcher:run(self, controler, method)
 end
 
-function App:selectDB(dbClass, configGroup)
-  dbClass = dbClass or 'mysql'
+function App:selectDB(dbModule, configGroup)
+  dbModule = dbModule or 'mysql'
   configGroup = configGroup or 'default'
 
-  if(dbClasses[dbClass] == nil) then
-    return nil, 'star.db.'..dbClass..' is not exists.'
+  if(allDbModules[dbModule] == nil) then
+    return nil, 'star.db.'..dbModule..' is not exists.'
   end
-  local db = dbClasses[dbClass]:new(configGroup)
+  local db = allDbModules[dbModule]:new(configGroup)
   if(db.instance == nil) then
-    return nil, 'star.db.'..dbClass..' `new` function does not return `instance` prototype.'
+    return nil, 'star.db.'..dbModule..' `new` function does not return a table contains `instance` prototype.'
   end
   return db.instance, nil
 end

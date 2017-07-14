@@ -1,3 +1,9 @@
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 00:06:52
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:57:20
+-- @desc: base controller
+
 local setmetatable = setmetatable
 local Controller = {}
 
@@ -25,8 +31,8 @@ function Controller:getResponse()
 end
 
 
-function Controller:getDB(...)
-  return self.app:getDB(...)
+function Controller:selectDB(...)
+  return self.app:selectDB(...)
 end
 
 

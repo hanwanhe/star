@@ -1,7 +1,9 @@
--- response.lua
--- @modify 2017-07-14 00:10
--- @author hanwanhe <hanwanhe@qq.com>
--- @desc response instance
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 00:30:52
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:54:22
+-- @desc: response instance
+
 
 local setmetatable = setmetatable
 local Response = {}

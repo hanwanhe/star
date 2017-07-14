@@ -1,3 +1,8 @@
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 00:06:52
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:56:42
+-- @desc: 
 local Index = {
   extends = 'base'
 }
@@ -7,7 +12,7 @@ function Index:construct(app)
 end
 
 function Index:index()
-  local redis = self:getDB('redis', 'default')
+  local redis = self:selectDB('redis', 'default')
   redis:set('name', 'hanwanhe')
   ngx.say(redis:get('name'))
 end

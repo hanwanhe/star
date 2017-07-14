@@ -1,32 +1,39 @@
+-- @Author: hanwanhe <hanwanhe@qq.com>
+-- @Date:   2017-07-14 00:06:52
+-- @Last Modified by: hanwanhe <hanwanhe@qq.com>
+-- @Last Modified time: 2017-07-14 23:59:14
+-- @desc: to execute the `controller` and `method`
+
 local setmetatable = setmetatable
-local base_controller = require('frame.lib.controller')  
+local pcall = pcall
+local Controller = require('star.lib.controller')  
 local Dispatcher = {}
-local mt = {__index = base_controller}
+local mt = {__index = Controller}
 
 function Dispatcher:run(app, controller, method)
-  local app_name = app.app_name 
-  local app_controller = require(app_name..'.controller.'..controller)
-  local meta_table = getmetatable(app_controller)
+  local appName = app.appName 
+  local AppController = require(appName..'.controller.'..controller)
+  local metaTable = getmetatable(AppController)
   -- load parent 
-  if(app_controller.extends ~= nil) then
-    local parent_controller = require(app_name..'.controller.'..app_controller.extends)
-    parent_controller.__index = parent_controller
-    if(meta_table == nil) then
-      setmetatable(app_controller, parent_controller)
-      app_controller.parent = parent_controller
-      setmetatable(parent_controller, mt)
-      parent_controller.parent = base_controller
+  if(AppController.extends ~= nil) then
+    local ParentController = require(appName..'.controller.'..AppController.extends)
+    ParentController.__index = ParentController
+    if(metaTable == nil) then
+      setmetatable(AppController, ParentController)
+      AppController.parent = ParentController
+      setmetatable(ParentController, mt)
+      ParentController.parent = Controller
     end
   else
-    if(meta_table == nil) then
-      setmetatable(app_controller, mt)
-      app_controller.parent = base_controller
+    if(metaTable == nil) then
+      setmetatable(AppController, mt)
+      AppController.parent = Controller
     end
   end
   -- app controller new instance
-  app_controller_instance = app_controller:new(app)
-  app_controller_instance:construct()
-  return app_controller_instance[method](app_controller_instance)
+  appControllerInstance = AppController:new(app)
+  appControllerInstance:construct()
+  return appControllerInstance[method](appControllerInstance)
 end
 
 return Dispatcher
