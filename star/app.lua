@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-14 23:55:32
+-- @Last Modified time: 2017-07-15 12:37:43
 -- @desc: every request will create one app instance
 
 
@@ -23,12 +23,13 @@ function App:new(appName)
     appName = appName,
     request = Request:new(),
     response = Response:new(),
+    ngxLog = ngx.log 
   }
   return setmetatable(instance, mt)
 end
 
 function App:run()
-  local controler, method = Router.parse(self.request)
+  local controler, method = Router.parse()
   Dispatcher:run(self, controler, method)
 end
 
@@ -41,9 +42,10 @@ function App:selectDB(dbModule, configGroup)
   end
   local db = allDbModules[dbModule]:new(configGroup)
   if(db.instance == nil) then
-    return nil, 'star.db.'..dbModule..' `new` function does not return a table contains `instance` prototype.'
+    return nil, 'star.db.'..dbModule..' `new` function does not return a table contains `instance` property.'
   end
   return db.instance, nil
 end
+
 
 return App
