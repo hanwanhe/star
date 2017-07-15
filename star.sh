@@ -2,7 +2,7 @@
 # @Author: hanwanhe <hanwanhe@qq.com>
 # @Date:   2017-07-15 14:08:59
 # @Last Modified by:   hanwanhe <hanwanhe@qq.com>
-# @Last Modified time: 2017-07-15 17:02:42
+# @Last Modified time: 2017-07-15 17:09:26
 # @desc: server controller script
 
 openrestyInstallPath=/usr/local/openresty
@@ -33,6 +33,9 @@ function my_exit(){
 }
 
 function server(){
+  if [ ! -x "./logs" ]; then
+    mkdir "./logs"
+  fi
   option=$1
   case  "$option"  in
     "start")
