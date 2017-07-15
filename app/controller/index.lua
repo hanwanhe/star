@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-15 13:06:33
+-- @Last Modified time: 2017-07-15 21:29:59
 -- @desc: index controller
 
 local ngx = ngx
@@ -15,7 +15,9 @@ function Index:construct(app)
 end
 
 function Index:index()
-  ngx.say(tostring(ngx.thread))
+  local redis = self.app:selectDB('redis', 'default')
+  redis:set('name', 'han')
+  ngx.say(redis:get('name'))
 end
 
 return Index
