@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-16 22:20:04
+-- @Last Modified time: 2017-07-16 23:16:14
 -- @desc: every request will create one app instance
 
 
@@ -45,7 +45,13 @@ function App:select_db(db_module, config_group)
   if(all_db_modules[db_module] == nil) then
     return nil, 'star.db.'..db_module..' is not exists.'
   end
-  local db = all_db_modules[db_module]:new(config_group)
+  local ok, db_config = pcall(require, self.app_name..'.config.db.'..db_module)
+  if ok then
+    config = db_config[config_group]
+  else
+    config = {}
+  end
+  local db = all_db_modules[db_module]:new(config)
   if(db.instance == nil) then
     return nil, 'star.db.'..db_module..' `new` function does not return a table contains `instance` property.'
   end
