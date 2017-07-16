@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-15 22:05:46
+-- @Last Modified time: 2017-07-16 22:17:41
 -- @desc: 
 local _M = {}
 local mt = {__index = _M}
@@ -20,7 +20,7 @@ function _M:new(name)
   return setmetatable({instance = red}, mt)
 end
 
-function _M:setKeepAlive()
+function _M:set_keepalive()
   self.instance:set_keepalive(30000, 2)
 end
 
