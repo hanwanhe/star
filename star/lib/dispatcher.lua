@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-16 22:16:38
+-- @Last Modified time: 2017-07-17 22:51:04
 -- @desc: to execute the `controller` and `method`
 
 local setmetatable = setmetatable
@@ -55,8 +55,6 @@ function Dispatcher:run(app, controller, method)
     ngx_log(ngx.ERR, app_controller_path.. ' property `'..method..'` is not a function.')
     Dispatcher:err(app, ngx.HTTP_NOT_FOUND)
   end
-  --db keepalive
-  app:set_db_keepalive()
 end
 
 function Dispatcher:err(app, status)

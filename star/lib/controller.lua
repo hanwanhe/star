@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-16 22:17:16
+-- @Last Modified time: 2017-07-17 22:55:34
 -- @desc: base controller
 
 local setmetatable = setmetatable
@@ -11,7 +11,8 @@ function Controller:new(app)
   local instance = {
     app = app,
     request = app.request,
-    response = app.response
+    response = app.response,
+    db = app.db
   }
   setmetatable(instance, self)
   self.__index = self
@@ -22,10 +23,6 @@ function Controller:construct()
 
 end
 
-
-function Controller:select_db(...)
-  return self.app:select_db(...)
-end
 
 
 return Controller
