@@ -1,10 +1,9 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-17 22:48:33
+-- @Last Modified time: 2017-07-19 22:01:52
 -- @desc: every request will create one app instance
 
-local setmetatable = setmetatable
 local Request = require('star.lib.request')
 local Response = require('star.lib.response')
 local Router = require('star.lib.router')

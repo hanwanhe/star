@@ -2,27 +2,17 @@
 # @Author: hanwanhe <hanwanhe@qq.com>
 # @Date:   2017-07-15 14:08:59
 # @Last Modified by:   hanwanhe <hanwanhe@qq.com>
-# @Last Modified time: 2017-07-15 17:09:26
+# @Last Modified time: 2017-07-19 22:46:19
 # @desc: server controller script
 
 openrestyInstallPath=/usr/local/openresty
 nginx="${openrestyInstallPath}/nginx/sbin/nginx -c conf/nginx.conf -p `pwd` "
 cmd="$1"
-if [ "$cmd" = "" ];then
-  cmd='server'
-fi
 option="$2"
-if [ "$option" = "" ];then
-  option='start'
-fi
+
 
 function usage(){
-  if [ $1 = 'server' ];then
-    echo "usage: star.sh server start|stop|reload|restart"
-  fi
-  if [ $1 = "create" ];then
-    echo "usage: star.sh create appname"
-  fi  
+  echo "usage: star.sh server start|stop|reload|restart"
   exit 1
 }
 
@@ -66,10 +56,8 @@ function server(){
 
 if [ "$cmd" = "server" ];then
   server $option
-elif [ "$cmd" = "create" ]; then
-  echo 'create'
 else
-  usage "server"
+  usage
 fi
 
 
