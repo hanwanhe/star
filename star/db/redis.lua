@@ -1,11 +1,11 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-17 23:24:33
+-- @Last Modified time: 2017-07-21 22:57:15
 -- @desc: redis module
 
 local require = require
-local Common = require('star.lib.common')
+local Func = require('star.lib.func')
 local Redis = {}
 local mt = {__index = Redis}
 local setmetatable = setmetatable
@@ -27,7 +27,7 @@ function Redis:new(config)
   if not red then
     return nil, err
   end
-  config = Common.table_merge(default_config, config)
+  config = Func.table_merge(default_config, config)
   red:set_timeout(config.timeout) 
   if(config.unix) then
     local ok, err = red:connect(config.unix, {pool = pool})

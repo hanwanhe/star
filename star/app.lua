@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-19 22:49:16
+-- @Last Modified time: 2017-07-21 22:55:15
 -- @desc: every request will create one app instance
 
 local Request = require('star.lib.request')
@@ -9,7 +9,7 @@ local Response = require('star.lib.response')
 local Router = require('star.lib.router')
 local Dispatcher = require('star.lib.dispatcher')
 local Db = require('star.lib.db')
-local Common = require('star.lib.Common')
+local Func = require('star.lib.func')
 
 
 local App = {}
@@ -21,7 +21,7 @@ function App:new(app_name)
     request = Request:new(),
     response = Response:new(),
     db = Db:new(app_name),
-    common = Common 
+    func = Func 
   }
   return setmetatable(instance, mt)
 end
