@@ -1,10 +1,9 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 11:55:44
+-- @Last Modified time: 2017-07-22 16:42:53
 -- @desc: to execute the `controller` and `method`
 
-local setmetatable = setmetatable
 local pcall = pcall
 local require = require
 local ngx = ngx

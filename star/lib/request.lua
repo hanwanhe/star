@@ -1,12 +1,12 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:22:10
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 13:31:56
+-- @Last Modified time: 2017-07-22 16:42:04
 -- @desc: request module
 
 local Cookie = require "resty.cookie"
 local Request = {}
-local mt = {__index = Request}
+Request.__index = Request
 local ngx = ngx
 
 function Request:new()
@@ -14,7 +14,7 @@ function Request:new()
     uri_args = ngx.req.get_uri_args(),
     _cookie = nil
   }
-  return setmetatable(instance, mt)
+  return setmetatable(instance, self)
 end
 
 function Request:get(arg)
