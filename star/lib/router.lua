@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 09:29:27
+-- @Last Modified time: 2017-07-22 10:42:14
 -- @desc: return the `controller` and `method` to be executed from the uri
 
 local setmetatable = setmetatable
