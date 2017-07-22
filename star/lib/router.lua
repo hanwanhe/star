@@ -1,10 +1,9 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 10:42:14
+-- @Last Modified time: 2017-07-22 12:05:21
 -- @desc: return the `controller` and `method` to be executed from the uri
 
-local setmetatable = setmetatable
 local table = table
 local gmatch = ngx.re.gmatch
 local strlower = string.lower
@@ -12,8 +11,8 @@ local strlower = string.lower
 
 local Router = {}
 
-function Router.parse(request)
-  local uri = request.ngx_var.uri
+function Router.parse()
+  local uri = ngx.var.uri
   if(uri == '/') then
     return 'index', 'index'
   end

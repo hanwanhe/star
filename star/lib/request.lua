@@ -1,26 +1,18 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:22:10
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 09:07:23
--- @desc: request instance
+-- @Last Modified time: 2017-07-22 13:31:56
+-- @desc: request module
 
 local Cookie = require "resty.cookie"
 local Request = {}
 local mt = {__index = Request}
 local ngx = ngx
-local ngx_var = ngx.var
-local ngx_req = ngx.req
 
 function Request:new()
-  local cookie, err = Cookie:new()
-  if not cookie then
-    ngx.log(ngx.ERR, "failed to new cookie: ", err)
-  end
   local instance = {
-    ngx_var = ngx_var,
-    ngx_req = ngx_req,
-    uri_args = ngx_req.get_uri_args(),
-    _cookie = cookie
+    uri_args = ngx.req.get_uri_args(),
+    _cookie = nil
   }
   return setmetatable(instance, mt)
 end
@@ -31,8 +23,8 @@ function Request:get(arg)
 end
 
 function Request:read_body()
-  self.ngx_req.read_body()
-  self.post_args = self.ngx_req.get_post_args()
+  ngx.req.read_body()
+  self.post_args = ngx.req.get_post_args()
 end
 
 function Request:post(arg)
@@ -42,11 +34,21 @@ function Request:post(arg)
 end
 
 function Request:cookie(arg)
-  if not self._cookie then return nil, 'cookie instantiation failed.' end
-  if(arg == nil) then return self._cookie:get_all() end
-  if(arg and type(arg) == 'string') then return self._cookie:get(arg) end
-  if(arg and type(arg) == 'table') then return self._cookie:set(arg) end
-  return nil, 'type error'
+  if not self._cookie then 
+    local cookie, err = Cookie:new()
+    if not cookie then
+      ngx.log(ngx.ERR, "failed to new cookie: ", err)
+      return nil, err
+    end
+    self._cookie = cookie
+  end
+  if(arg and type(arg) == 'table') then 
+    return self._cookie:set(arg)
+  elseif(arg == nil) then
+    return self._cookie:get_all()
+  else
+    return  self._cookie:get(arg)
+  end
 end
 
 
