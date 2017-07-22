@@ -1,17 +1,21 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:22:10
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-21 23:01:45
+-- @Last Modified time: 2017-07-22 09:07:23
 -- @desc: request instance
 
 local Cookie = require "resty.cookie"
 local Request = {}
 local mt = {__index = Request}
+local ngx = ngx
 local ngx_var = ngx.var
 local ngx_req = ngx.req
 
 function Request:new()
-  local cookie = Cookie:new()
+  local cookie, err = Cookie:new()
+  if not cookie then
+    ngx.log(ngx.ERR, "failed to new cookie: ", err)
+  end
   local instance = {
     ngx_var = ngx_var,
     ngx_req = ngx_req,
@@ -44,5 +48,6 @@ function Request:cookie(arg)
   if(arg and type(arg) == 'table') then return self._cookie:set(arg) end
   return nil, 'type error'
 end
+
 
 return Request

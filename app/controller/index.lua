@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-21 23:02:00
+-- @Last Modified time: 2017-07-22 08:07:36
 -- @desc: index controller
 
 local Base = require('app.controller.base')  
@@ -22,5 +22,6 @@ function Index:index()
   --cookie
   self.response:var_dump(self.request:cookie())
 end
+
 
 return Index
