@@ -1,2 +1,2 @@
 # star
-a simple &amp; reliable openresty web framework
+a simple & reliable & high-performance web framework based on openresty
