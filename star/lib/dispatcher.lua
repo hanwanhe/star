@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 10:54:43
+-- @Last Modified time: 2017-07-22 11:01:07
 -- @desc: to execute the `controller` and `method`
 
 local setmetatable = setmetatable
@@ -24,7 +24,7 @@ function Dispatcher.run(app, controller, method)
   end
   -- new current controller
   current_controller_instance = CurrentController_or_err:new(app)
-  method_func = rawget(current_controller_instance, method)
+  method_func = current_controller_instance[method]
   if(type(method_func) == 'function') then
     current_controller_instance:construct(app)
     method_func(current_controller_instance)
