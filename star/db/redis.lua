@@ -1,14 +1,14 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-21 22:57:15
+-- @Last Modified time: 2017-07-22 17:51:07
 -- @desc: redis module
 
-local require = require
+local string = string
 local Func = require('star.lib.func')
 local Redis = {}
-local mt = {__index = Redis}
-local setmetatable = setmetatable
+Redis.__index = Redis
+
 local default_config = {
   host = '127.0.0.1',
   port = 6379,
@@ -29,18 +29,19 @@ function Redis:new(config)
   end
   config = Func.table_merge(default_config, config)
   red:set_timeout(config.timeout) 
-  if(config.unix) then
-    local ok, err = red:connect(config.unix, {pool = pool})
+  local ok, err
+  if(type(config.unix) == 'string' and string.len(config.unix) > 0) then
+    ok, err = red:connect(config.unix, {pool = pool})
   else
-    local ok, err = red:connect(config.host, config.port, {pool = pool})
+    ok, err = red:connect(config.host, config.port, {pool = pool})
   end 
   if not ok then
     return nil, err
   end
-  if(config.password) then
+  if(type(config.password) and string.len(config.password) > 0) then
     local count, err = red:get_reused_times()
     if 0 == count then
-        ok, err = red:auth(config.password)
+        local ok, err = red:auth(config.password)
         if not ok then
             return nil, err
         end
@@ -48,11 +49,10 @@ function Redis:new(config)
         return nil, err
     end
   end
-
-  return setmetatable({instance = red, config = config}, mt), nil
+  return setmetatable({instance = red, config = config}, self), nil
 end
 
-function Redis:free()
+function Redis:set_keepalive()
   self.instance:set_keepalive(self.config.max_idle_timeout, self.config.pool_size)
 end
 
