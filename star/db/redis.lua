@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-23 23:40:09
+-- @Last Modified time: 2017-07-23 23:45:43
 -- @desc: redis module
 
 local string = string
@@ -54,7 +54,7 @@ end
 
 
 function Redis:set_keepalive()
-  self.instance:set_keepalive(self.config.max_idle_timeout, self.config.pool_size)
+  self.sock:set_keepalive(self.config.max_idle_timeout, self.config.pool_size)
 end
 
 
