@@ -1,10 +1,11 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-16 22:39:28
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-21 22:59:35
+-- @Last Modified time: 2017-07-23 23:39:49
 -- @desc: some useful function
 
 local ngx_say = ngx.say
+local string = string
 local Func = {}
 
 --table merge
@@ -47,6 +48,11 @@ function Func._var_dump_table(var, level)
     return
   end
   ngx_say(var)
+end
+
+--string and length > 0
+function Func.str_exists(var)
+  return type(var) == 'string' and string.len(var) > 0
 end
 
 return Func

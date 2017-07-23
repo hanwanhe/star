@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 17:51:07
+-- @Last Modified time: 2017-07-23 23:40:09
 -- @desc: redis module
 
 local string = string
@@ -30,7 +30,7 @@ function Redis:new(config)
   config = Func.table_merge(default_config, config)
   red:set_timeout(config.timeout) 
   local ok, err
-  if(type(config.unix) == 'string' and string.len(config.unix) > 0) then
+  if(Func.str_exists(config.unix)) then
     ok, err = red:connect(config.unix, {pool = pool})
   else
     ok, err = red:connect(config.host, config.port, {pool = pool})
@@ -38,7 +38,7 @@ function Redis:new(config)
   if not ok then
     return nil, err
   end
-  if(type(config.password) and string.len(config.password) > 0) then
+  if(Func.str_exists(config.password)) then
     local count, err = red:get_reused_times()
     if 0 == count then
         local ok, err = red:auth(config.password)
@@ -49,8 +49,9 @@ function Redis:new(config)
         return nil, err
     end
   end
-  return setmetatable({instance = red, config = config}, self), nil
+  return setmetatable({sock = red, config = config}, self), nil
 end
+
 
 function Redis:set_keepalive()
   self.instance:set_keepalive(self.config.max_idle_timeout, self.config.pool_size)
