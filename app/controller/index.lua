@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-23 23:33:33
+-- @Last Modified time: 2017-07-24 23:12:03
 -- @desc: index controller
 
 local Base = require('app.controller.base')  
@@ -18,12 +18,9 @@ function Index:index()
   ngx.say(request:post('name'))
   ngx.say(request:cookie('name'))
 
-  --redis
-  local db = self.app.db
-  local redis, err = db:connect('redis', 'default')
-  redis.sock:set('name', 'hanwanhe@')
-  ngx.say(redis.sock:get('name'))
-  redis:set_keepalive()
+  local user_model = self:load_model('user')
+  ngx.say(user_model:get_name())
+
 end
 
 
