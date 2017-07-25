@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-24 22:46:01
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:20:30
+-- @Last Modified time: 2017-07-25 22:40:36
 -- @desc: base model
 
 local Model = {}
@@ -22,6 +22,10 @@ end
 
 function Model:load_model(...)
   return self.app:load_model(...)
+end
+
+function Model:load_database(...)
+  return self.app:load_database(...)
 end
 
 return Model

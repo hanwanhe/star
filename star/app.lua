@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:22:11
+-- @Last Modified time: 2017-07-25 22:39:19
 -- @desc: the framework entrance  file
 
 local require = require
@@ -27,8 +27,8 @@ function App:new(app_name)
   return setmetatable(instance, self)
 end
 
-function App:load_database()
-
+function App:load_database(...)
+  return self.db:connect(...)
 end
 
 

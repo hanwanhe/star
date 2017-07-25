@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-17 21:45:41
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 17:31:51
+-- @Last Modified time: 2017-07-25 22:46:20
 -- @desc: db module
 
 local setmetatable = setmetatable
@@ -39,7 +39,6 @@ function DB:connect(module_name, config_group)
   if ok and type(config_module[config_group]) == 'table' then
     config = config_module[config_group]
   end
-  ngx.say('helo')
   local db, err = db_module:new(config)
   if not db then
     return nil, err
