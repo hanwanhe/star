@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-17 21:45:41
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:46:20
+-- @Last Modified time: 2017-07-26 23:21:46
 -- @desc: db module
 
 local setmetatable = setmetatable
@@ -47,6 +47,14 @@ function DB:connect(module_name, config_group)
   return db, nil
 end
 
-
+function DB:set_keepalive()
+  for module_name, config_groups in pairs(self.loaded) do  
+    for config_group, db in pairs(config_groups) do
+      db:set_keepalive()
+    end
+  end
+  self.loaded = {}
+  return true
+end
 
 return DB

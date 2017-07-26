@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:40:08
+-- @Last Modified time: 2017-07-26 23:00:18
 -- @desc: base controller
 
 local Controller = {}
@@ -24,7 +24,7 @@ function Controller:load_model(...)
   return self.app:load_model(...)
 end
 
-function load_database(...)
+function Controller:load_database(...)
   return self.app:load_database()
 end
 

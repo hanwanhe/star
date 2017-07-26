@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 16:42:53
+-- @Last Modified time: 2017-07-26 23:44:09
 -- @desc: to execute the `controller` and `method`
 
 local pcall = pcall
@@ -26,6 +26,7 @@ function Dispatcher.run(app, controller, method)
   if(type(method_func) == 'function') then
     current_controller_instance:construct(app)
     method_func(current_controller_instance)
+    self.app:set_keepalive()
   else
     ngx.log(ngx.ERR, 'no function named ', method, ' in the controller ', current_controller_file) 
     ngx.exit(ngx.HTTP_NOT_FOUND)

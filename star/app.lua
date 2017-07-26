@@ -1,14 +1,15 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:39:19
+-- @Last Modified time: 2017-07-26 23:42:10
 -- @desc: the framework entrance  file
 
 local require = require
 local Request = require('star.lib.request')
+local Response = require('star.lib.response')
 local Router = require('star.lib.router')
 local Dispatcher = require('star.lib.dispatcher')
-local Db = require('star.lib.db')
+local DB = require('star.lib.db')
 local Func = require('star.lib.func')
 local ngx = ngx
 
@@ -20,17 +21,21 @@ function App:new(app_name)
   local instance = {
     app_name = app_name,
     request = Request:new(),
-    db = Db:new(app_name),
+    db = DB:new(app_name),
     func = Func,
     loaded_model = {}
   }
+  instance['response'] = Response:new(instance)
   return setmetatable(instance, self)
 end
 
-function App:load_database(...)
-  return self.db:connect(...)
+function App:load_database( ... )
+  return self.db:connect( ... )
 end
 
+function App:set_keepalive( ... )
+  return self.db:set_keepalive( ... )
+end
 
 function App:load_model(model_name)
   if(self.loaded_model[model_name]) then
