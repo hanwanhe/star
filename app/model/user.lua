@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-24 22:49:08
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-25 22:41:51
+-- @Last Modified time: 2017-07-27 22:40:48
 -- @desc: user model
 
 local Model = require('star.lib.model')  
