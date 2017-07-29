@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-22 12:05:21
+-- @Last Modified time: 2017-07-29 09:25:01
 -- @desc: return the `controller` and `method` to be executed from the uri
 
 local table = table
@@ -10,8 +10,13 @@ local strlower = string.lower
 
 
 local Router = {}
+Router.__index = Router
 
-function Router.parse()
+function Router:new()
+  return setmetatable({controller = '', method = ''}, self)
+end
+
+function Router:_parse()
   local uri = ngx.var.uri
   if(uri == '/') then
     return 'index', 'index'
@@ -25,6 +30,11 @@ function Router.parse()
   else
     return table.concat(match, '.', 1, #match - 1), strlower(match[#match])
   end
+end
+
+function Router:parse()
+  self.controller, self.method = self:_parse()
+  return self.controller, self.method
 end
 
 return Router

@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-27 22:40:28
+-- @Last Modified time: 2017-07-29 09:05:36
 -- @desc: the framework entrance  file
 
 local ngx = ngx
@@ -23,6 +23,7 @@ function App:new(app_name)
   local instance = {
     app_name = app_name,
     request = Request:new(),
+    router = Router:new(),
     func = Func,
     loaded_model = {},
   }
@@ -69,7 +70,7 @@ end
 
 -- app insatance execute
 function App:run()
-  local controller, method = Router.parse()
+  local controller, method = self.router:parse()
   local ok, err = pcall(Dispatcher.run, self, controller, method)
   if not ok then
     ngx.log(ngx.ERR, err)
