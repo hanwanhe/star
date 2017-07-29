@@ -1,12 +1,12 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 09:26:18
+-- @Last Modified time: 2017-07-29 11:27:48
 -- @desc: base controller
 
 local Controller = {}
 
-function Controller:new(app)
+function Controller:_new(app)
   local instance = {
     app = app,
     request = app.request,
@@ -17,7 +17,7 @@ function Controller:new(app)
   return instance
 end
 
-function Controller:construct()
+function Controller:_construct()
 
 end
 

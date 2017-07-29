@@ -1,16 +1,16 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:06:52
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 09:25:42
+-- @Last Modified time: 2017-07-29 11:28:08
 -- @desc: index controller
 
 local Base = require('app.controller.base')  
 local Index = {}
 setmetatable(Index, {__index = Base})
-
-function Index:construct()
-  Base.construct(self)
+function Index:_construct()
+  Base._construct(self)
 end
+
 
 function Index:index()
   ngx.say(self.request:get('name'))

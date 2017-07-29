@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 09:05:36
+-- @Last Modified time: 2017-07-29 11:34:25
 -- @desc: the framework entrance  file
 
 local ngx = ngx
@@ -62,8 +62,8 @@ function App:load_model(model_name)
     return nil, err
   end
   local Model = Model_or_err
-  local model_instance = Model:new(self)
-  model_instance:construct()
+  local model_instance = Model:_new(self)
+  model_instance:_construct()
   self.loaded_model[model_name] = model_instance
   return model_instance
 end

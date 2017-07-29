@@ -1,12 +1,12 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-24 22:46:01
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 09:26:36
+-- @Last Modified time: 2017-07-29 11:33:15
 -- @desc: base model
 
 local Model = {}
 
-function Model:new(app)
+function Model:_new(app)
   local instance = {
     app = app,
     request = app.request,
@@ -17,7 +17,7 @@ function Model:new(app)
   return instance
 end
 
-function Model:construct()
+function Model:_construct()
 
 end
 
