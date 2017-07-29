@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 22:47:44
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 11:34:25
+-- @Last Modified time: 2017-07-29 13:04:34
 -- @desc: the framework entrance  file
 
 local ngx = ngx
@@ -26,6 +26,7 @@ function App:new(app_name)
     router = Router:new(),
     func = Func,
     loaded_model = {},
+    config = require(app_name..'.config.app')
   }
   return setmetatable(instance, self)
 end

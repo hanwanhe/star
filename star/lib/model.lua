@@ -1,7 +1,7 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-24 22:46:01
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-29 11:33:15
+-- @Last Modified time: 2017-07-29 13:08:22
 -- @desc: base model
 
 local Model = {}
@@ -10,7 +10,9 @@ function Model:_new(app)
   local instance = {
     app = app,
     request = app.request,
-    router = app.router
+    router = app.router,
+    config = app.config,
+    func = app.func
   }
   setmetatable(instance, self)
   self.__index = self
