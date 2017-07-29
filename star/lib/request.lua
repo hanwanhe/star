@@ -1,19 +1,17 @@
 -- @Author: hanwanhe <hanwanhe@qq.com>
 -- @Date:   2017-07-14 00:22:10
 -- @Last Modified by: hanwanhe <hanwanhe@qq.com>
--- @Last Modified time: 2017-07-26 23:08:50
+-- @Last Modified time: 2017-07-29 11:59:52
 -- @desc: request module
 
 local ngx = ngx
-local Cookie = require "resty.cookie"
 local Request = {}
 Request.__index = Request
 
 
 function Request:new()
   local instance = {
-    uri_args = ngx.req.get_uri_args(),
-    _cookie = nil
+    uri_args = ngx.req.get_uri_args()
   }
   return setmetatable(instance, self)
 end
@@ -32,24 +30,6 @@ function Request:post(arg)
   if(self.post_args == nil) then self:read_body() end
   if(type(arg) ~= 'string') then return self.post_args end 
   return self.post_args[arg]
-end
-
-function Request:cookie(arg)
-  if not self._cookie then 
-    local cookie, err = Cookie:new()
-    if not cookie then
-      ngx.log(ngx.ERR, "failed to new cookie: ", err)
-      return nil, err
-    end
-    self._cookie = cookie
-  end
-  if(arg and type(arg) == 'table') then 
-    return self._cookie:set(arg)
-  elseif(arg == nil) then
-    return self._cookie:get_all()
-  else
-    return  self._cookie:get(arg)
-  end
 end
 
 
